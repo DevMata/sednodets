@@ -1,0 +1,2 @@
+s/fin/end/
+s/hasta luego/bye/

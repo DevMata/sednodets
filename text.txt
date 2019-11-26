@@ -1,0 +1,4 @@
+hola mundo hola mundo
+hasta luego mundo
+hola mundo
+fin archivo
