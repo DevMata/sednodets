@@ -20,12 +20,10 @@ for (let parameter of _) {
 		}
 	} else if (regexval.checkfile(parameter)) {
 		fileNames.push(parameter)
+	} else {
+		console.log(`Unkown parameter ${parameter}`)
+		process.exit()
 	}
-}
-
-if (!fileNames.length) {
-	console.log("Files don't provided")
-	process.exit()
 }
 
 if (e) {
@@ -48,6 +46,16 @@ if (f) {
 				.forEach(command => commands.push(regexval.processcmd(command)))
 		)
 	}
+}
+
+if (!commands.length) {
+	console.log('Commands not provided')
+	process.exit()
+}
+
+if (!fileNames.length) {
+	console.log('Files not provided')
+	process.exit()
 }
 
 for (let fileName of fileNames) {

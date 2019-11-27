@@ -1,22 +1,24 @@
 import { args } from './formatter'
 
-const cmd = /^s\/(?<search>[\w| ]+)\/(?<replace>[\w| ]+)\/(?<flag>p|g)?$/
-const file = /^(?<name>\w+)\.\w+$/
-const ext = /^\.\w+/
+const cmd = new RegExp(
+	'^s/(?<search>[a-zA-z1-9_ ]+)/(?<replace>[a-zA-z1-9_ ]+)/(?<flag>|p|g|(pg)|(gp))$'
+)
+const file = new RegExp('^(?<name>[a-zA-Z1-9_ ]+).[a-zA-Z1-9_ ]+$')
+const ext = new RegExp('^.[a-zA-Z1-9_ ]+$')
 
-function processcmd(command: string): args {
-	if (cmd.test(command)) {
-		const grps = cmd.exec(command)!.groups
-
-		return {
-			search: grps!.search,
-			replace: grps!.replace,
-			flag: grps!.flag || ''
-		}
-	} else {
+function processcmd(command: string) {
+	if (!cmd.test(command)) {
 		console.log(`Invalid command ${command}`)
 		process.exit()
 		return {} as args
+	}
+
+	const grps = cmd.exec(command)!.groups
+
+	return {
+		search: grps!.search,
+		replace: grps!.replace,
+		flag: grps!.flag
 	}
 }
 
