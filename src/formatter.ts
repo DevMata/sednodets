@@ -38,4 +38,4 @@ function processlng(line: string, args: args, n: boolean) {
 	return line.replace(new RegExp(args.search, 'g'), args.replace) + '\n'
 }
 
-export { processLine, processln, processlnp, processlng }
+export { processLine, processln, processlnp, processlng, args }

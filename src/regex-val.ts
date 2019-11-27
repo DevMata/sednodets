@@ -1,8 +1,10 @@
+import { args } from './formatter'
+
 const cmd = /^s\/(?<search>[\w| ]+)\/(?<replace>[\w| ]+)\/(?<flag>p|g)?$/
 const file = /^(?<name>\w+)\.\w+$/
 const ext = /^\.\w+/
 
-function processcmd(command: string) {
+function processcmd(command: string): args {
 	if (cmd.test(command)) {
 		const grps = cmd.exec(command)!.groups
 
@@ -14,7 +16,7 @@ function processcmd(command: string) {
 	} else {
 		console.log(`Invalid command ${command}`)
 		process.exit()
-		return {}
+		return {} as args
 	}
 }
 
