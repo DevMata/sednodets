@@ -4,7 +4,8 @@
 	"description": "An improved version of sednodejs with Typescript",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"compile": "tsc && npx prettier ./build/**/*.js --write && cls",
+		"sed": "node ./build/tryon.js"
 	},
 	"repository": {
 		"type": "git",

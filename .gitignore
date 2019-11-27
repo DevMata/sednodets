@@ -1,2 +1,3 @@
-node_modules
-tryon.*
+node_modules/
+*try*
+/build
