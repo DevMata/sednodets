@@ -4,38 +4,49 @@ interface args {
 	flag: string
 }
 
-function processLine(line: string, args: args, n: boolean) {
-	if (args.flag) {
-		if (args.flag === 'g') {
-			return processlng(line, args, n)
-		}
+interface pLines {
+	firstLine: string
+	secondLine: string
+}
 
-		if (args.flag === 'p') {
-			return processln(line, args, n) + processlnp(line, args)
-		}
-	} else {
-		return processln(line, args, n)
+function processLine(line: string, args: args): pLines {
+	const flag = args.flag.includes('g') ? 'g' : ''
+
+	let firstLine: string = ''
+	let secondLine: string = ''
+
+	firstLine = processLn(line, args.search, args.replace, flag)
+
+	if (args.flag.includes('p')) {
+		secondLine = processLnp(line, args.search, args.replace, flag)
+	}
+
+	return {
+		firstLine,
+		secondLine
 	}
 }
 
-function processln(line: string, args: args, n: boolean) {
-	if (n) return ''
-
-	return line.replace(args.search, args.replace) + '\n'
+function processLn(
+	line: string,
+	search: string,
+	replace: string,
+	flag: string
+) {
+	return line.replace(new RegExp(search, flag), replace)
 }
 
-function processlnp(line: string, args: args) {
-	if (line.includes(args.search)) {
-		return line.replace(args.search, args.replace) + '\n'
+function processLnp(
+	line: string,
+	search: string,
+	replace: string,
+	flag: string
+) {
+	if (line.includes(search)) {
+		return line.replace(new RegExp(search, flag), replace)
 	}
 
 	return ''
 }
 
-function processlng(line: string, args: args, n: boolean) {
-	if (n) return ''
-
-	return line.replace(new RegExp(args.search, 'g'), args.replace) + '\n'
-}
-
-export { processLine, processln, processlnp, processlng, args }
+export { processLine, args, pLines }
