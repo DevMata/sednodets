@@ -63,27 +63,37 @@ for (let fileName of fileNames) {
 	let content = filehandler.read(fileName)
 	let arrayContent = filehandler.arrayify(content)
 
-	processedContent = arrayContent.map(contentLine => {
-		commands.forEach(
-			command =>
-				(contentLine = String(
-					formatter.processLine(contentLine.replace(/\n+$/, ''), command, Boolean(n))
-				))
-		)
-		return contentLine
-	})
+	for (let line of arrayContent) {
+		let result: formatter.pLines = {} as formatter.pLines
+
+		for (let command of commands) {
+			result = formatter.processLine(line, command)
+
+			if (result.secondLine) {
+				line = result.secondLine
+			} else {
+				line = result.firstLine
+			}
+
+			if (!processedContent.includes(result.secondLine))
+				processedContent = [...processedContent, result.secondLine]
+		}
+		if (!n) processedContent = [...processedContent, result.firstLine]
+	}
+
+	processedContent = processedContent.filter(line => line)
 
 	if (i) {
 		if (typeof i === 'boolean') {
-			filehandler.write(fileName, processedContent.join(''))
+			filehandler.write(fileName, processedContent.join('\n'))
 		} else if (typeof i === 'string') {
 			filehandler.write(regexval.getFileName(fileName) + i, content)
-			filehandler.write(fileName, processedContent.join(''))
+			filehandler.write(fileName, processedContent.join('\n'))
 		} else {
 			console.log("You don't need many extensions")
 			process.exit()
 		}
 	} else {
-		console.log(processedContent.join(''))
+		console.log(processedContent.join('\n'))
 	}
 }

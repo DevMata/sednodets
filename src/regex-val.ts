@@ -7,7 +7,7 @@ const file = new RegExp('^(?<name>[a-zA-Z1-9_ ]+).[a-zA-Z1-9_ ]+$')
 const ext = new RegExp('^.[a-zA-Z1-9_ ]+$')
 
 function processcmd(command: string) {
-	if (!cmd.test(command)) {
+	if (!checkcmd(command)) {
 		console.log(`Invalid command ${command}`)
 		process.exit()
 		return {} as args
