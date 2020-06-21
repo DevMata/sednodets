@@ -4,7 +4,8 @@
 	"description": "An improved version of sednodejs with Typescript",
 	"main": "index.js",
 	"scripts": {
-		"compile": "tsc && npx prettier ./**/*.js --write && cls"
+		"compile": "tsc && npx prettier ./**/*.js --write && cls",
+		"lint": "npx eslint '*/**/*.{js,ts}' --fix"
 	},
 	"repository": {
 		"type": "git",
