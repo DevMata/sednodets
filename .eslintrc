@@ -1,11 +1,17 @@
 {
-	"parserOptions": { "ecmaVersion": 2019 },
-
-	"extends": ["plugin:prettier/recommended"],
-
-	"plugins": ["prettier"],
-
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"sourceType": "module"
+	},
+	"extends": [
+		"plugin:@typescript-eslint/eslint-recommended",
+		"prettier/@typescript-eslint",
+		"plugin:prettier/recommended"
+	],
 	"rules": {
-		"prettier/prettier": "error"
+		"@typescript-eslint/interface-name-prefix": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/no-explicit-any": "off"
 	}
 }
