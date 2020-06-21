@@ -10,8 +10,8 @@
 		"type": "git",
 		"url": "git+https://github.com/DevMata/sednodets.git"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": ["sed","nodejs","typescript"],
+	"author": "Antonio Mata ;D",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/DevMata/sednodets/issues"
